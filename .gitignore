@@ -1,0 +1,10 @@
+# Maven build directory
+/target/
+
+# UCanAccess database temporary files
+**/Ucanaccess_*
+*.lck
+
+# IDE settings
+.idea/
+*.iml

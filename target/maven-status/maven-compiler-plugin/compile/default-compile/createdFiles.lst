@@ -1,6 +1,0 @@
-com\weatherapp\servlet\MeServlet.class
-com\weatherapp\db\Database.class
-com\weatherapp\security\PasswordUtil.class
-com\weatherapp\servlet\BaseServlet.class
-com\weatherapp\util\Json.class
-com\weatherapp\servlet\PublicCitiesServlet.class
