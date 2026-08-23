@@ -1,0 +1,3 @@
+@echo off
+echo Starting Weather Dashboard...
+"C:\Users\sachi\maven\apache-maven-3.9.6\bin\mvn.cmd" org.eclipse.jetty.ee10:jetty-ee10-maven-plugin:12.0.8:run

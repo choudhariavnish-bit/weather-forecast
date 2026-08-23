@@ -1,0 +1,4 @@
+To run:
+
+Step 1: Double-click run.bat (or type .\run.bat in terminal)
+Step 2: Open http://localhost:8080/
