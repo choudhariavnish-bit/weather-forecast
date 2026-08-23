@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    API configuration for Weather Dashboard.
+    Keep this file on the server and do NOT commit real keys to source control.
+-->
+<api-config>
+    <openweather-api-key>d7e3d04f9cb288e2bf269f9f72134ddd</openweather-api-key>
+    <google-maps-api-key>AIzaSyDfZWLsss20A70TaMlIIgujuADXgVwlCCM</google-maps-api-key>
+</api-config>

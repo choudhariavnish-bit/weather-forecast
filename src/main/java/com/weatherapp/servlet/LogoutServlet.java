@@ -1,0 +1,2 @@
+package com.weatherapp.servlet;import jakarta.servlet.annotation.WebServlet;import jakarta.servlet.http.*;import java.io.*;
+@WebServlet("/api/logout") public class LogoutServlet extends BaseServlet{protected void doPost(HttpServletRequest r,HttpServletResponse s)throws IOException{HttpSession x=r.getSession(false);if(x!=null)x.invalidate();s.setContentType("application/json");s.getWriter().write("{\"ok\":true}");}}
