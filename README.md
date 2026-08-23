@@ -39,11 +39,17 @@ Edit the file before deployment:
 
 Environment variables with the names `OPENWEATHER_API_KEY` and `GOOGLE_MAPS_API_KEY` can still override the XML values for production deployments.
 
-## Run
+## Run Locally (Jetty Web Server)
+```bash
+mvn org.eclipse.jetty.ee10:jetty-ee10-maven-plugin:12.0.8:run
+```
+Open your browser at: **http://localhost:8080/**
+
+## Build WAR (Production Deployment)
 ```bash
 mvn clean package
 ```
-Deploy `target/weather-dashboard.war` to Apache Tomcat 10.1+.
+Deploy `target/weather-dashboard.war` to Apache Tomcat 10.1+ or Jetty 12.
 
 ## Public Index / About
 The public landing page is `index.html`. It contains an India-focused globe illustration, Register/Login links, an overview of Indian weather, and project participant placeholders. `about.html` provides the expanded Indian weather section and participant list.
