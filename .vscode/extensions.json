@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "vscjava.vscode-java-pack",
+    "vscjava.vscode-maven",
+    "redhat.java",
+    "redhat.vscode-xml",
+    "ritwickdey.liveserver",
+    "esbenp.prettier-vscode",
+    "ecmel.vscode-html-css",
+    "formulahendry.auto-rename-tag",
+    "formulahendry.auto-close-tag"
+  ]
+}
