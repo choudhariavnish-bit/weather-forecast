@@ -1,6 +1,9 @@
 @echo off
 echo Starting Weather Dashboard at http://localhost:8081/ ...
 
+REM Automatically launch the GUI in default browser
+start "" /b powershell -NoProfile -Command "Start-Sleep -Seconds 3; Start-Process 'http://localhost:8081/dashboard.html'"
+
 REM Check previous path
 if exist "C:\Users\sachi\maven\apache-maven-3.9.6\bin\mvn.cmd" (
     "C:\Users\sachi\maven\apache-maven-3.9.6\bin\mvn.cmd" org.eclipse.jetty.ee10:jetty-ee10-maven-plugin:12.0.8:run
