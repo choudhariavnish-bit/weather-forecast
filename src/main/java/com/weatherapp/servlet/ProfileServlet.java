@@ -10,24 +10,25 @@ import java.util.Map;
 
 @WebServlet("/api/profile")
 public class ProfileServlet extends BaseServlet {
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
         try {
             HttpSession s = requireSession(req, res);
             int userId = (int) s.getAttribute("UserID");
-            String sql = "SELECT u.UserID,u.FullName,u.Mobile,u.Email,u.CityID,c.CityName,c.CountryCode " +
-                         "FROM Users u LEFT JOIN Cities c ON u.CityID=c.CityID WHERE u.UserID=?";
+            String sql = "SELECT u.user_id, u.full_name, u.mobile, u.email, u.city_id, c.city_name, c.country " +
+                         "FROM Users u LEFT JOIN Cities c ON u.city_id = c.city_id WHERE u.user_id = ?";
             try (Connection c = Database.getConnection(); PreparedStatement p = c.prepareStatement(sql)) {
                 p.setInt(1, userId);
                 try (ResultSet r = p.executeQuery()) {
                     if (!r.next()) throw new Exception("User profile not found.");
                     Json.write(res, Map.of(
-                        "id", r.getInt("UserID"),
-                        "name", r.getString("FullName"),
-                        "mobile", r.getString("Mobile"),
-                        "email", r.getString("Email"),
-                        "cityId", r.getInt("CityID"),
-                        "city", r.getString("CityName"),
-                        "country", r.getString("CountryCode")
+                        "id", r.getInt("user_id"),
+                        "name", r.getString("full_name"),
+                        "mobile", r.getString("mobile") != null ? r.getString("mobile") : "",
+                        "email", r.getString("email"),
+                        "cityId", r.getInt("city_id"),
+                        "city", r.getString("city_name") != null ? r.getString("city_name") : "",
+                        "country", r.getString("country") != null ? r.getString("country") : ""
                     ));
                 }
             }

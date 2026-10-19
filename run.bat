@@ -1,5 +1,5 @@
 @echo off
-echo Starting Weather Dashboard...
+echo Starting Weather Dashboard at http://localhost:8081/ ...
 
 REM Check previous path
 if exist "C:\Users\sachi\maven\apache-maven-3.9.6\bin\mvn.cmd" (

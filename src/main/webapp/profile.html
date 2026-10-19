@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>User Profile & Preferences | Weather Portal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/app.css" rel="stylesheet">
+</head>
+<body class="dashboard-bg">
+  <div id="appNav"></div>
+
+  <main class="container py-5">
+    <div class="row g-4 justify-content-center">
+      <div class="col-lg-8">
+        <div id="msg"></div>
+
+        <!-- Account Profile Details -->
+        <div class="card shadow-sm border-0 mb-4">
+          <div class="card-body p-4 p-lg-5">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <div>
+                <h3 class="fw-bold mb-1">User Profile</h3>
+                <p class="text-secondary mb-0">Your account identity and contact details</p>
+              </div>
+              <div class="avatar bg-primary text-white fs-3 rounded-circle d-flex align-items-center justify-content-center" style="width: 58px; height: 58px;">
+                👤
+              </div>
+            </div>
+            <hr>
+            <div id="profileLoading" class="text-center py-3">
+              <div class="spinner-border text-primary spinner-border-sm"></div> Loading profile...
+            </div>
+            <div id="profileDetails" class="row g-3 d-none">
+              <div class="col-md-6">
+                <label class="text-secondary small">Full Name</label>
+                <div class="fs-5 fw-semibold" id="profName">—</div>
+              </div>
+              <div class="col-md-6">
+                <label class="text-secondary small">Mobile / Login ID</label>
+                <div class="fs-5 fw-semibold" id="profMobile">—</div>
+              </div>
+              <div class="col-md-6">
+                <label class="text-secondary small">Email Address</label>
+                <div class="fs-5" id="profEmail">—</div>
+              </div>
+              <div class="col-md-6">
+                <label class="text-secondary small">Registered City</label>
+                <div class="fs-5" id="profCity">—</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- User Preferences -->
+        <div class="card shadow-sm border-0">
+          <div class="card-body p-4 p-lg-5">
+            <h3 class="fw-bold mb-1">Application Preferences</h3>
+            <p class="text-secondary mb-4">Customize your display units, theme, and weather alert rules</p>
+
+            <form id="prefForm">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Temperature Unit</label>
+                  <select id="tempUnit" class="form-select form-select-lg">
+                    <option value="C">Celsius (°C)</option>
+                    <option value="F">Fahrenheit (°F)</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Theme Mode</label>
+                  <select id="themeMode" class="form-select form-select-lg">
+                    <option value="light">Light Mode</option>
+                    <option value="dark">Dark Mode</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Default City</label>
+                  <select id="defaultCity" class="form-select form-select-lg">
+                    <option value="">Loading cities...</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Rain Alert Threshold (%)</label>
+                  <div class="input-group input-group-lg">
+                    <input id="rainThreshold" type="number" min="10" max="100" step="5" class="form-control" value="70">
+                    <span class="input-group-text">%</span>
+                  </div>
+                  <div class="form-text">Notify or highlight when precipitation probability exceeds this value.</div>
+                </div>
+
+                <div class="col-12 mt-4">
+                  <div class="form-check form-switch fs-5">
+                    <input class="form-check-input" type="checkbox" id="notifEnabled" checked>
+                    <label class="form-check-label fs-6 fw-semibold" for="notifEnabled">Enable personalized forecast notifications</label>
+                  </div>
+                </div>
+
+                <div class="col-12 mt-4">
+                  <button type="submit" class="btn btn-primary btn-lg px-4 rounded-pill">Save Preferences</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/profile.js"></script>
+</body>
+</html>

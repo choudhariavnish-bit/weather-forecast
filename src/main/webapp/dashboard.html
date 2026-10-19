@@ -1,1 +1,157 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Weather Dashboard</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"><link href="css/app.css" rel="stylesheet"></head><body class="dashboard-bg"><div id="appNav"></div><main class="container-fluid py-4 px-lg-4"><div id="msg"></div><div class="row g-3 align-items-end mb-3"><div class="col-md-5 col-lg-4"><label class="form-label fw-semibold">Select City</label><select id="city" class="form-select form-select-lg"></select></div><div class="col-auto"><a class="btn btn-primary btn-lg" href="select-city.html">+ Add City</a></div><div class="col-auto"><button id="refresh" class="btn btn-outline-secondary btn-lg">↻ Refresh</button></div></div><div id="loading" class="text-center py-5 d-none"><div class="spinner-border text-primary"></div><div class="mt-2">Syncing weather...</div></div><section id="weather" class="d-none"><div class="row g-3"><div class="col-lg-5"><div class="card hero-card shadow-sm border-0 h-100"><div class="card-body p-4"><div class="d-flex justify-content-between"><div><div id="place" class="text-white-50"></div><h1 id="temp" class="display-1 fw-bold mb-0"></h1><div id="condition" class="fs-4"></div><div id="feels" class="text-white-50 mt-1"></div></div><img id="icon" class="weather-icon" alt="weather"></div><div class="row g-2 mt-4" id="metrics"></div></div></div></div><div class="col-lg-7"><div class="card shadow-sm border-0 h-100"><div class="card-body"><div class="d-flex justify-content-between align-items-center mb-3"><h5 class="mb-0">Weather Alerts</h5><span class="badge text-bg-danger" id="alertCount">0</span></div><div id="alerts"><div class="text-secondary">No active alerts reported for this location.</div></div></div></div></div></div><div class="card shadow-sm border-0 mt-3"><div class="card-body"><h5 class="mb-3">5-Day Forecast</h5><div id="forecast" class="row g-3"></div></div></div><div class="card shadow-sm border-0 mt-3"><div class="card-body"><h5 class="mb-3">1-Day Step Timeline</h5><div id="timeline" class="timeline"></div></div></div></section></main><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script><script src="js/nav.js"></script><script src="js/dashboard.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weather Dashboard | Weather Portal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/app.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+</head>
+<body class="dashboard-bg">
+  <div id="appNav"></div>
+
+  <main class="container-fluid py-4 px-lg-4">
+    <div id="msg"></div>
+
+    <!-- Top City & Control Bar -->
+    <div class="row g-3 align-items-center justify-content-between mb-3">
+      <div class="col-md-6 col-lg-5">
+        <div class="d-flex align-items-center gap-2">
+          <div class="flex-grow-1">
+            <label class="form-label fw-semibold small text-secondary mb-1">Active City</label>
+            <div class="input-group input-group-lg shadow-sm">
+              <select id="city" class="form-select"></select>
+              <button id="favBtn" class="btn btn-outline-warning" title="Toggle Favorite">
+                <span id="favStar">✩</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-5 text-md-end">
+        <div class="d-flex align-items-center justify-content-md-end gap-2 mt-md-4">
+          <!-- Unit Switcher -->
+          <div class="btn-group shadow-sm" role="group" aria-label="Temperature Unit">
+            <button type="button" class="btn btn-outline-primary" id="unitC">°C</button>
+            <button type="button" class="btn btn-outline-primary" id="unitF">°F</button>
+          </div>
+          <a class="btn btn-primary shadow-sm" href="select-city.html">+ Add City</a>
+          <button id="refresh" class="btn btn-outline-secondary shadow-sm" title="Refresh weather data">↻ Refresh</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Favorite Cities Chips -->
+    <div class="mb-3 d-flex align-items-center gap-2 flex-wrap" id="favChipsContainer">
+      <span class="small fw-semibold text-secondary">Favorites:</span>
+      <div id="favChips" class="d-flex gap-2 flex-wrap"></div>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loading" class="text-center py-5 d-none">
+      <div class="spinner-border text-primary" role="status"></div>
+      <div class="mt-2 text-secondary fw-semibold">Fetching latest weather data...</div>
+    </div>
+
+    <!-- Weather Content Section -->
+    <section id="weather" class="d-none">
+      <!-- Row 1: Current Weather Hero Card + Weather Alerts -->
+      <div class="row g-4 mb-4">
+        <!-- Hero Card -->
+        <div class="col-lg-7">
+          <div class="card hero-card shadow-sm border-0 h-100">
+            <div class="card-body p-4 p-md-5">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="d-flex align-items-center gap-2">
+                    <h3 id="place" class="fw-bold mb-0"></h3>
+                    <span id="heroFavStar" class="fs-4 text-warning cursor-pointer" title="Favorite"></span>
+                  </div>
+                  <div class="text-white-50 small mt-1" id="localTime"></div>
+                  <h1 id="temp" class="display-2 fw-bold my-2"></h1>
+                  <div id="condition" class="fs-4 text-capitalize fw-semibold"></div>
+                  <div id="feels" class="text-white-50 mt-1"></div>
+                </div>
+                <img id="icon" class="weather-icon" alt="weather">
+              </div>
+
+              <!-- 6 Metrics Grid -->
+              <div class="row g-2 mt-4" id="metrics"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Weather Alerts Card -->
+        <div class="col-lg-5">
+          <div class="card shadow-sm border-0 h-100">
+            <div class="card-body p-4">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="fw-bold mb-0">Weather Alerts & Warnings</h5>
+                <span class="badge bg-danger rounded-pill px-3 py-2" id="alertCount">0</span>
+              </div>
+              <div id="alerts">
+                <div class="text-secondary small">Checking for severe weather bulletins...</div>
+              </div>
+              <div class="mt-3 text-end">
+                <a href="alerts.html" class="small text-decoration-none">View full alert history & advisory rules →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2: Next 24 Hours (Hourly Forecast) -->
+      <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body p-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold mb-0">Next 24 Hours (Hourly Forecast)</h5>
+            <small class="text-secondary">3-hour interval telemetry</small>
+          </div>
+          <div class="hourly-scroll" id="hourlyList"></div>
+        </div>
+      </div>
+
+      <!-- Row 3: Interactive Temperature & Precipitation Chart -->
+      <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body p-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+              <h5 class="fw-bold mb-0">24-Hour Temperature & Rainfall Trend</h5>
+              <small class="text-secondary">Visual temperature variation curve and rainfall amounts</small>
+            </div>
+            <a href="analytics.html" class="btn btn-sm btn-outline-primary rounded-pill">Open Full Analytics →</a>
+          </div>
+          <div style="position: relative; height: 260px;">
+            <canvas id="dashboardChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 4: 7-Day Daily Forecast -->
+      <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body p-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold mb-0">7-Day Daily Forecast</h5>
+            <small class="text-secondary">Upcoming daily high & low temperatures</small>
+          </div>
+          <div id="forecast" class="row g-3"></div>
+        </div>
+      </div>
+
+      <!-- Row 5: 1-Day Step Timeline -->
+      <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body p-4">
+          <h5 class="fw-bold mb-3">1-Day Step Timeline</h5>
+          <div id="timeline" class="timeline"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

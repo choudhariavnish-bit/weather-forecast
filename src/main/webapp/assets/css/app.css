@@ -1,0 +1,229 @@
+body {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.auth-bg {
+  background: linear-gradient(135deg, #e9f4ff, #f8fbff);
+}
+
+.dashboard-bg {
+  background: #f4f7fb;
+}
+
+body.dark-mode {
+  background: #0b1329 !important;
+  color: #e2e8f0;
+}
+
+body.dark-mode .card {
+  background: #131e3a;
+  color: #e2e8f0;
+  border-color: #1e293b;
+}
+
+body.dark-mode .forecast-card,
+body.dark-mode .hourly-card,
+body.dark-mode .timeline-item {
+  background: #182544;
+  border-color: #263558;
+  color: #e2e8f0;
+}
+
+body.dark-mode .form-select,
+body.dark-mode .form-control {
+  background-color: #1a2748;
+  border-color: #2c3e66;
+  color: #fff;
+}
+
+body.dark-mode .table {
+  color: #e2e8f0;
+}
+
+body.dark-mode .table-light {
+  background-color: #182544;
+  color: #e2e8f0;
+}
+
+.brand-icon {
+  font-size: 3rem;
+}
+
+.hero-card {
+  background: linear-gradient(135deg, #0d6efd, #3b82f6);
+  color: #fff;
+  border-radius: 18px;
+}
+
+.weather-icon {
+  width: 110px;
+  height: 110px;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.15));
+}
+
+.metric {
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  padding: 12px;
+  backdrop-filter: blur(4px);
+}
+
+.card {
+  border-radius: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.forecast-card, .hourly-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 16px;
+  text-align: center;
+  height: 100%;
+  background: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.forecast-card:hover, .hourly-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+.forecast-card img, .hourly-card img {
+  width: 58px;
+  height: 58px;
+}
+
+.hourly-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+}
+
+.hourly-card {
+  min-width: 115px;
+  flex: 0 0 auto;
+}
+
+.timeline {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.timeline-item {
+  min-width: 160px;
+  border-left: 4px solid #0d6efd;
+  background: #f8fafc;
+  padding: 14px;
+  border-radius: 10px;
+}
+
+.alert-box {
+  border-left: 4px solid #dc3545;
+  background: #fff5f5;
+  padding: 14px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+body.dark-mode .alert-box {
+  background: rgba(220, 53, 69, 0.15);
+  border-left-color: #ef4444;
+}
+
+.fav-btn {
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  transition: transform 0.2s ease;
+}
+
+.fav-btn:hover {
+  transform: scale(1.2);
+}
+
+.fav-chip {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.fav-chip:hover {
+  transform: scale(1.05);
+}
+
+.weather-nav {
+  background: linear-gradient(135deg, #0d6efd, #084298);
+}
+
+.weather-nav .nav-link {
+  color: rgba(255, 255, 255, 0.88);
+  margin-right: 0.25rem;
+  padding: 0.5rem 0.85rem;
+}
+
+.weather-nav .nav-link:hover, .weather-nav .nav-link.active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 0.5rem;
+}
+
+#map {
+  height: 620px;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+@media(max-width: 991.98px) {
+  #map { height: 500px; }
+}
+
+.landing-bg {
+  background: linear-gradient(180deg, #f4f9ff 0%, #fff 48%, #f8fbff 100%);
+  min-height: 100vh;
+}
+
+.landing-hero {
+  border-radius: 28px;
+  background: linear-gradient(135deg, #063b88 0%, #0d6efd 58%, #35a7ff 100%);
+  color: #fff;
+  box-shadow: 0 24px 60px rgba(13, 110, 253, 0.22);
+  overflow: hidden;
+}
+
+.landing-globe {
+  max-width: 420px;
+  filter: drop-shadow(0 22px 28px rgba(0, 0, 0, 0.18));
+}
+
+.info-card, .participant-card {
+  height: 100%;
+  padding: 20px;
+  border: 1px solid #e7edf5;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.participant-card { text-align: center; }
+
+.avatar {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+  background: #eaf3ff;
+  color: #0d6efd;
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.participant-card h5 { margin-bottom: 4px; }
+.participant-card small { color: #6c757d; }
